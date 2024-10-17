@@ -50,11 +50,12 @@
             width: 300px;
             text-align: left;
             transition: transform 0.2s;
+            cursor: pointer;
         }
         .video-container:hover {
             transform: scale(1.05);
         }
-        video {
+        .video-thumbnail {
             width: 100%;
             height: auto;
             display: block;
@@ -63,6 +64,33 @@
         .video-title {
             font-size: 18px;
             color: #333;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal video {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1000px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
         footer {
             padding: 20px;
@@ -89,40 +117,85 @@
 
     <!-- Video Gallery Section -->
     <div id="videos" class="video-gallery">
-        <!-- Video 1 -->
-        <div class="video-container">
-            <video controls>
-                <source src="https://v2.cdnde.com/x2/upload_6f59938eceaf7a4ed8f06874a9dd1e69/40696/JOPORN_NET_40696_720p.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <!-- Video 1 Thumbnail -->
+        <div class="video-container" onclick="openModal('video1')">
+            <img class="video-thumbnail" src="https://via.placeholder.com/300x200?text=Video+1" alt="Video 1 Thumbnail">
             <p class="video-title">Young sister gave herself to her fetishist brother in her bed</p>
         </div>
 
-        <!-- Video 2 -->
-        <div class="video-container">
-            <video controls>
-                <source src="https://v4.cdnde.com/x4/upload_5dc66803fd53ef63cafb7a813284d557/40779/JOPORN_NET_40779_720p.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <!-- Video 2 Thumbnail -->
+        <div class="video-container" onclick="openModal('video2')">
+            <img class="video-thumbnail" src="https://via.placeholder.com/300x200?text=Video+2" alt="Video 2 Thumbnail">
             <p class="video-title">Russian slut in stockings loves to fuck in the morning in the kitchen</p>
         </div>
 
-        <!-- Video 3 -->
-        <div class="video-container">
-            <video controls>
-                <source src="https://v1.cdnde.com/x1/upload_5d8d122a999b9e3614a626ebef6a6681/40780/JOPORN_NET_40780_720p.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <p class="video-title">Russian girlfriends had fun with their boyfriend in bed in the morning 3</p>
+        <!-- Video 3 Thumbnail -->
+        <div class="video-container" onclick="openModal('video3')">
+            <img class="video-thumbnail" src="https://via.placeholder.com/300x200?text=Video+3" alt="Video 3 Thumbnail">
+            <p class="video-title">Russian girlfriends had fun with their boyfriend in bed in the morning</p>
         </div>
+    </div>
 
-        <!-- Add more videos as needed -->
+    <!-- Video Modal for Video 1 -->
+    <div id="video1" class="modal">
+        <span class="close-modal" onclick="closeModal('video1')">&times;</span>
+        <video controls>
+            <source src="https://v2.cdnde.com/x2/upload_6f59938eceaf7a4ed8f06874a9dd1e69/40696/JOPORN_NET_40696_720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Video Modal for Video 2 -->
+    <div id="video2" class="modal">
+        <span class="close-modal" onclick="closeModal('video2')">&times;</span>
+        <video controls>
+            <source src="https://v4.cdnde.com/x4/upload_5dc66803fd53ef63cafb7a813284d557/40779/JOPORN_NET_40779_720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Video Modal for Video 3 -->
+    <div id="video3" class="modal">
+        <span class="close-modal" onclick="closeModal('video3')">&times;</span>
+        <video controls>
+            <source src="https://v1.cdnde.com/x1/upload_5d8d122a999b9e3614a626ebef6a6681/40780/JOPORN_NET_40780_720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <!-- Footer -->
     <footer>
         <p>Copyright © 2024 My Video Website</p>
     </footer>
+
+    <script>
+        // Open the modal for a specific video
+        function openModal(videoId) {
+            document.getElementById(videoId).style.display = "block";
+        }
+
+        // Close the modal
+        function closeModal(videoId) {
+            const modal = document.getElementById(videoId);
+            modal.style.display = "none";
+            const video = modal.querySelector('video');
+            video.pause();  // Stop the video when modal is closed
+        }
+
+        // Close modal on Esc or F11 key press
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" || event.key === "F11") {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(function(modal) {
+                    if (modal.style.display === "block") {
+                        modal.style.display = "none";
+                        const video = modal.querySelector('video');
+                        video.pause();  // Stop the video when modal is closed
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
